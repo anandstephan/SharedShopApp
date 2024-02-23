@@ -2,16 +2,20 @@ import { useEffect } from "react"
 import { FlatList, View ,StyleSheet,Text} from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import { GlobalStyles } from "../../constants/styles"
-import { startRealtimeUpdates } from "../../features/order/orderSlice"
+import { startRealtimeOrderUpdates } from "../../features/order/orderSlice"
 import Card from "./components/Card"
 
 const Order = () =>{
     const orders = useSelector(state => state.orders.orders)
+  
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        dispatch(startRealtimeUpdates())
+        dispatch(startRealtimeOrderUpdates())
+        
     },[])
+
+
 
 return <View style={styles.container}>
     <View style={styles.innerContainer}>
@@ -19,7 +23,7 @@ return <View style={styles.container}>
     </View>
     <FlatList
     data={orders}
-    renderItem={({item}) => <Card type="Order" id={Object.keys(item)[0]} details={item[Object.keys(item)[0]]['productData']}/>}
+    renderItem={({item}) => <Card type="Order" id={Object.keys(item)[0]} details={item[Object.keys(item)[0]]['productData']} userId={item[Object.keys(item)[0]]['userId']}/>}
     />
 </View>
 }

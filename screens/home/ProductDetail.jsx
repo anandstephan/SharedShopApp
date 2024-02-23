@@ -19,20 +19,22 @@ const ProductDetail = () =>{
             const productDetail = item[0][productId]
             productDetail.productQty--
            await updateProduct(productId,productDetail)
-            const userId = await getUser().userId//please check it first
-            console.log("🚀 ~ onPressHandler ~ userId:", userId)
+            const userDetail = await getUser()//please check it first
+            let userId = userDetail.userId
+
+            
          const updateProductItem = await checkUserAlreayOrderOrNot(userId,productDetail.productName)
-         console.log(updateProductItem)
+       
          if(updateProductItem === "No New Element"){
             productDetail.productQty=1
-            addOrder(shortid.generate(),"s8GBhPKG_",productDetail)            
+            addOrder(shortid.generate(),userId,productDetail)            
          }
          else if(updateProductItem){
             updateProductItem.productDetail.productData.productQty +=1
-            addOrder(updateProductItem.orderId,"s8GBhPKG_",updateProductItem.productDetail.productData)
+            addOrder(updateProductItem.orderId,userId,updateProductItem.productDetail.productData)
          }else{
             productDetail.productQty = 1
-            addOrder(shortid.generate(),"s8GBhPKG_",productDetail)
+            addOrder(shortid.generate(),userId,productDetail)
          }
 
 

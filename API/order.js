@@ -21,13 +21,14 @@ export const addOrder = async (orderId,userId,productData) =>{
     }
 }
 
-export const checkUserAlreayOrderOrNot =  async (userId,productName) =>{
+export const checkUserAlreayOrderOrNot =  async (userId,productName) => {
 
     try {
      const response = await database.ref("orders").once("value")
-  
+    
      if(response.exists()){
         let newresponse = response.val()
+
         let newArr =[]
         Object.keys(newresponse).forEach(item => {
             if(newresponse[item].userId === userId && newresponse[item].productData.productName === productName){

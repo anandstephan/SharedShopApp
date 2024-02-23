@@ -18,20 +18,23 @@ export const fetchOrders = createAsyncThunk('product/fetchOrders', async (_, { r
 
 
 
-export const startRealtimeUpdates = () => (dispatch) => {
+export const startRealtimeOrderUpdates = () => (dispatch) => {
   const ordersRef = database.ref('orders');
 
   ordersRef.on('value', (snapshot) => {
     const orders = snapshot.val();
-   const newOrders= Object.keys(orders).map(item => {
-    return {[item]:orders[item]} 
-  })
-    dispatch(setOrders(newOrders));
+    if(orders!==null){
+      const newOrders= Object.keys(orders).map(item => {
+        return {[item]:orders[item]} 
+      })
+        dispatch(setOrders(newOrders));
+    }
+
   });
 };
 
 const orderslice = createSlice({
-  name: 'product',
+  name: 'orders',
   initialState,
   reducers: {
     setOrders(state, action) {

@@ -19,7 +19,8 @@ const BottomTab = ()=> {
       <Tab.Screen name="Stack" component={StackNavigator}
       
   options={{
-    tabBarIcon:(({color,size,focused}) =>     <Icon name="home" size={size} color={focused ?GlobalStyles.colors.primary:GlobalStyles.colors.primary500} />),
+    tabBarIcon:(({color,size,focused}) =><Icon name="home" size={size} color={focused ?GlobalStyles.colors.primary:GlobalStyles.colors.primary500} />),
+    
   }}
       />
       <Tab.Screen name="Order" component={Order}

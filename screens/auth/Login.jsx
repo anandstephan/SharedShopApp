@@ -19,12 +19,12 @@ import { addUser } from "../../features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
  
-  const Login = ({setIsLogin}) => {
+  const Login = () => {
     // state manangement
     const dispatch = useDispatch()
    
-    const [email, setEmail] = useState("anandstephan98@gmail.com");
-    const [password, setPassword] = useState("12345");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigation = useNavigation()
 
     const handleLogin = async () => {
@@ -38,7 +38,7 @@ import { useDispatch, useSelector } from "react-redux";
              Alert.alert("Message",res.msg);
           }else if(res.msg === "You're Successfully Login"){
              Alert.alert("Message",res.msg);
-            
+
              AddUser(res.loginDetail.item,email,res.loginDetail.res.username)
             dispatch(addUser(res.loginDetail))
             }

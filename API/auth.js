@@ -25,6 +25,7 @@ export const login =async (email,password) =>{
             if(response.val()[item]['email'] == email && response.val()[item]['password'] == password){
               
                 loginDetail = {res:response.val()[item],item}
+                
             }
         } )
         

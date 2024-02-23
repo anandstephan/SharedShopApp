@@ -3,15 +3,15 @@ import { View,StyleSheet,Image,Text, Pressable } from "react-native"
 import { Popover } from "react-native-popable"
 import { GlobalStyles } from "../../../constants/styles"
 
-const Card = ({details:{productName,productPrice,productImg,productQty},id,type}) =>{
+const Card = ({details:{productName,productPrice,productImg,productQty},id,type,userId}) =>{
   
     const navigation = useNavigation()
-    
+      
 
     const onPressHandler = () =>{
         
         if(type==="Order"){
-            navigation.navigate("SharedProductDetail",{id,productName,productPrice,productImg,productQty})
+            navigation.navigate("SharedProductDetail",{id,productName,productPrice,productImg,productQty,userId})
         }else{
             navigation.navigate('ProductDetail',{id,productName,productPrice,productImg})
         }
@@ -22,12 +22,10 @@ const Card = ({details:{productName,productPrice,productImg,productQty},id,type}
 
 return <Pressable onPress={onPressHandler}>
     <View style={styles.container}>
-        <Popover content="See profile" action="hover" strictPosition={true} position="left">
         <Image
         source={{uri:productImg}}   
         style={styles.image} 
         />
-        </Popover>
         <Text style={styles.txtStyle}>{productName}</Text>
         <Text style={styles.txtStyle}>Rs.{productPrice}</Text>
         <Text style={styles.txtStyle}>Qty:- {productQty}</Text>
